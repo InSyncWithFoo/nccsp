@@ -101,6 +101,7 @@ def _parse_options(content: str, suggestion_definitions: _SuggestionDefinitions)
 
 
 def _parse_command(match: regex.Match[str]) -> Command:
+	description = cast(str | None, match['description'])
 	suggestion_definitions = _parse_suggestion_definitions(match)
 	fragment_group = match['fragments']
 	options_and_arguments_group = match['options_and_arguments']
@@ -112,7 +113,11 @@ def _parse_command(match: regex.Match[str]) -> Command:
 	fragments = _parse_fragments(fragment_group)
 	options_and_arguments = _parse_options(options_and_arguments_group, suggestion_definitions)
 	
-	return Command(fragments = fragments, options_and_arguments = options_and_arguments)
+	return Command(
+		fragments = fragments,
+		description = description,
+		options_and_arguments = options_and_arguments
+	)
 
 
 def parse_commands(script: str) -> list[Command]:

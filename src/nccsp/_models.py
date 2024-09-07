@@ -13,4 +13,5 @@ class OptionOrArgument(BaseModel):
 
 class Command(BaseModel):
 	fragments: list[str]
+	description: str | None
 	options_and_arguments: list[OptionOrArgument]

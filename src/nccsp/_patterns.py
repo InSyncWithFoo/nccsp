@@ -15,9 +15,10 @@ option_or_argument = regex.compile(
 	(?P<name>
 		[-a-zA-Z0-9]+
 	|
-		(?P<variadic>\.{3})?[a-zA-Z0-9]+
+		(?P<variadic>\.{3})?
+		[a-zA-Z0-9]+
+		(?P<optional>\?)?
 	)
-	(?P<optional>\?)?
 	(?:\((?P<alias>[^()\n]+)\))?
 	(?:
 		:[^\S\r\n]*
@@ -29,7 +30,7 @@ option_or_argument = regex.compile(
 )
 command = regex.compile(
 	r'''(?mx)
-	(?P<definition>
+	(?:
 		^\x20{2}def\x20"(?P<suggestion_definition_id>[^"]+)"\x20\[]\x20\{
 		\s*(?P<suggestion_definition_values>[\s\S]+?)\s*
 		}\n\n
