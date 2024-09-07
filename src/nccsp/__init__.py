@@ -26,7 +26,7 @@ def _parse_value_list(content: str) -> list[str]:
 		message = f'Suggestion definition is malformed: {content}'
 		raise _UnexpectedFormatException(message)
 	
-	return matches.captures('value')
+	return [value.strip('"') for value in matches.captures('value')]
 
 
 def _parse_suggestion_definitions(match: regex.Match[str]) -> _SuggestionDefinitions:
