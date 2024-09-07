@@ -26,7 +26,16 @@ def _parse_value_list(content: str) -> list[str]:
 		message = f'Suggestion definition is malformed: {content}'
 		raise _UnexpectedFormatException(message)
 	
-	return [value.strip('"') for value in matches.captures('value')]
+	values = [
+		value.removeprefix('"').removesuffix('"')
+		for value in matches.captures('value')
+	]
+	
+	if any('\\' in value for value in values):
+		message = f'Malformed suggestion value: {content}'
+		raise _UnexpectedFormatException(message)
+	
+	return values
 
 
 def _parse_suggestion_definitions(match: regex.Match[str]) -> _SuggestionDefinitions:
@@ -59,6 +68,10 @@ def _parse_option(match: regex.Match[str], suggestion_definitions: _SuggestionDe
 		if suggestion_id is not None
 		else None
 	)
+	
+	if alias is not None and not regex.fullmatch(r'-[a-zA-Z]', alias):
+		message = f'Malformed alias: {alias}'
+		raise _UnexpectedFormatException(message)
 	
 	return OptionOrArgument(
 		name = name,
