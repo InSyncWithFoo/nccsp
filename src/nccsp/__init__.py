@@ -10,6 +10,12 @@ from ._models import Command, OptionOrArgument
 from ._patterns import command, option_or_argument, suggestion_values
 
 
+__all__ = [
+	'Command', 'OptionOrArgument',
+	'parse_commands'
+]
+
+
 type _SuggestionDefinitions = dict[str, list[str]]
 
 
