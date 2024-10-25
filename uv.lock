@@ -393,7 +393,7 @@ dependencies = [
     { name = "typer" },
 ]
 
-[package.optional-dependencies]
+[package.dependency-groups]
 dev = [
     { name = "hatch" },
     { name = "hypothesis" },
@@ -405,15 +405,19 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "hatch", marker = "extra == 'dev'", specifier = "~=1.12.0" },
-    { name = "hypothesis", marker = "extra == 'dev'", specifier = "~=6.112.0" },
     { name = "pydantic", specifier = "~=2.9.0" },
-    { name = "pyright", marker = "extra == 'dev'", specifier = "~=1.1.379" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = "~=8.3.2" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = "~=5.0.0" },
     { name = "regex", specifier = "~=2024.7.24" },
-    { name = "tox", marker = "extra == 'dev'", specifier = "~=4.18.0" },
     { name = "typer", specifier = "~=0.12.5" },
+]
+
+[package.metadata.dependency-groups]
+dev = [
+    { name = "hatch", specifier = "~=1.12.0" },
+    { name = "hypothesis", specifier = "~=6.112.0" },
+    { name = "pyright", specifier = "~=1.1.379" },
+    { name = "pytest", specifier = "~=8.3.2" },
+    { name = "pytest-cov", specifier = "~=5.0.0" },
+    { name = "tox", specifier = "~=4.18.0" },
 ]
 
 [[package]]
